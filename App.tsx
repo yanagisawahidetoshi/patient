@@ -36,7 +36,9 @@ export default function App() {
 
   return (
     <favoritesContext.Provider value={ctxFavorites}>
-      <Navigation />
+      <recordsContext.Provider value={ctxRecords}>
+        <Navigation />
+      </recordsContext.Provider>
     </favoritesContext.Provider>
   );
 }

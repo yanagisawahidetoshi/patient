@@ -2,13 +2,24 @@ import React from "react";
 import styled from "styled-components/native";
 import { View, Text } from "react-native";
 import { favoritesContext } from "../../../context/favorites";
+import { useRecords } from "../../../context/records";
+import FavoritesModel from "../../../model/favoriteModel";
 
 const FavoriteList: React.FC = () => {
-  const ctx = React.useContext(favoritesContext);
+  const favoritesCtx = React.useContext(favoritesContext);
+  const recordsCtx = useRecords();
   const keyExtractor = (item: any, index: number) => index.toString();
+
+  const handlePress = (item: FavoritesModel) => {
+    const date = new Date();
+    const recods = JSON.parse(JSON.stringify(recordsCtx.records));
+    recods.push({ ...item, createdAt: date.getTime() });
+    recordsCtx.setRecords(recods);
+  };
+
   const renderItem = ({ item }) => {
     return (
-      <List>
+      <List onPress={() => handlePress(item)}>
         <ListText>{item.name}</ListText>
         <ListTextPrice>
           {item.price}
@@ -30,7 +41,7 @@ const FavoriteList: React.FC = () => {
       <ContentWrapper>
         <Content
           keyExtractor={keyExtractor}
-          data={ctx.favorites}
+          data={favoritesCtx.favorites}
           renderItem={renderItem}
           numColumns={3}
         />
@@ -65,7 +76,7 @@ const ListTextPrice = styled.Text`
   color: #094067;
   font-weight: bold;
   font-size: 20;
-  text-align: center;
+  text-align: right;
   margin-top: 8px;
 `;
 const Unit = styled.Text`
@@ -77,7 +88,7 @@ const ListTextCal = styled.Text`
   color: #094067;
   font-weight: bold;
   font-size: 20;
-  text-align: center;
+  text-align: right;
   margin-top: 8px;
 `;
 

@@ -1,5 +1,7 @@
 import React from "react";
 import { RecordsModel } from "../model/recordsModel";
+import Storage from "react-native-storage";
+import AsyncStorage from "@react-native-community/async-storage";
 
 type RecordsContext = {
   records: Array<RecordsModel>;
@@ -20,6 +22,13 @@ export const useRecords = (): RecordsContext => {
 
   const setRecords = React.useCallback((current: Array<RecordsModel>): void => {
     setData(current);
+    const storage = new Storage({
+      storageBackend: AsyncStorage,
+    });
+    storage.save({
+      key: "records",
+      data: [...current],
+    });
   }, []);
   return {
     records,

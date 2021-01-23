@@ -5,8 +5,6 @@ import PatientButton from "./components/PatientButton";
 import Modal from "./components/Modal";
 import Favorite from "./components/Favorite";
 import { favoritesContext } from "../../context/favorites";
-import * as colors from "../../const/colors";
-import { SafeAreaView } from "react-native";
 
 const Top: React.FC = () => {
   const [isVisibleModal, setIsVisibleModal] = React.useState<boolean>(false);
@@ -19,29 +17,39 @@ const Top: React.FC = () => {
     return accumulator.calorie + currentValue.calorie;
   }, 0);
   return (
-    <SafeAreaView style={{ backgroundColor: "#FFF", flex: 1 }}>
-      <Title>我慢の結果</Title>
-      <Price>
-        9,950<Aside>円我慢しました</Aside>
-      </Price>
-      <Price>
-        9,950<Aside>kcal我慢しました</Aside>
-      </Price>
-      <Divider
-        style={{ height: 1, backgroundColor: "#e1e8ee", marginBottom: 16 }}
-      />
-      <Favorite />
-      <PatientButton handlePressButton={() => setIsVisibleModal(true)} />
-      <Modal
-        isVisible={isVisibleModal}
-        hideModal={() => setIsVisibleModal(false)}
-      />
-    </SafeAreaView>
+    <Container>
+      <Content>
+        <Title>我慢の結果</Title>
+        <Price>
+          9,950<Aside>円我慢しました</Aside>
+        </Price>
+        <Price>
+          9,950<Aside>kcal我慢しました</Aside>
+        </Price>
+        <Divider
+          style={{ height: 1, backgroundColor: "#e1e8ee", marginBottom: 16 }}
+        />
+        <Favorite />
+        <PatientButton handlePressButton={() => setIsVisibleModal(true)} />
+        <Modal
+          isVisible={isVisibleModal}
+          hideModal={() => setIsVisibleModal(false)}
+        />
+      </Content>
+    </Container>
   );
 };
 
 export default Top;
 
+const Container = styled.SafeAreaView`
+  background-color: #fffffe;
+  flex: 1;
+`;
+const Content = styled.View`
+  padding-top: 16px;
+  flex: 1;
+`;
 const Title = styled.Text`
   text-align: center;
   font-size: 24;

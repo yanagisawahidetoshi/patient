@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components/native";
 import { View } from "react-native";
-import { Text } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { recordsContext } from "../../context/records";
 import * as colors from "../../const/colors";
@@ -9,17 +8,18 @@ import * as colors from "../../const/colors";
 const Records: React.FC = () => {
   const ctx = React.useContext(recordsContext);
   const keyExtractor = (item: any, index: number) => index.toString();
+
   const renderItem = ({ item }) => {
     return (
       <List>
         <ListLeft>
-          <Name>お酒</Name>
-          <Date>2020/02/01</Date>
+          <Name>{item.name}</Name>
+          <Date>{item.createdAt}</Date>
         </ListLeft>
         <ListRight>
           <ListRightWrapper>
-            <Price>300円</Price>
-            <Calorie>300kcal</Calorie>
+            <Price>{item.price}円</Price>
+            <Calorie>{item.calorie}kcal</Calorie>
           </ListRightWrapper>
           <View>
             <Icon name="angle-right" size={20} color="#5f6c7b" />
@@ -28,11 +28,10 @@ const Records: React.FC = () => {
       </List>
     );
   };
-  console.log(ctx);
   return (
     <Container>
       <ListWrapper
-        data={["", ""]}
+        data={ctx.records}
         renderItem={renderItem}
         keyExtractor={keyExtractor}
       />
