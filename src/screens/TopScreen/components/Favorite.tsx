@@ -56,7 +56,9 @@ const Content = styled.FlatList`
   padding: 0 0 4px 8px;
 `;
 
-const Wrapper = styled.View``;
+const Wrapper = styled.View`
+  margin: auto;
+`;
 const TitleWrapper = styled.View`
   padding: 0 0 8px 8px;
 `;

@@ -4,6 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import TopScreen from "./screens/TopScreen";
 import RecordsScreen from "./screens/RecordsScreen";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 const Tab = createBottomTabNavigator();
 
@@ -25,7 +26,7 @@ function RecordsStackScreen() {
   return (
     <RecordsStack.Navigator>
       <RecordsStack.Screen
-        name="Top"
+        name="Records"
         component={RecordsScreen}
         options={headerOption}
       />
@@ -48,9 +49,35 @@ function TopStackScreen() {
 function Navigation() {
   return (
     <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="Top" component={TopStackScreen} />
-        <Tab.Screen name="Recoreds" component={RecordsStackScreen} />
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color, size }) => {
+            if (route.name === "HOME") {
+              return (
+                <Icon
+                  name="home"
+                  size={20}
+                  color={focused ? "#3da9fc" : "#5f6c7b"}
+                />
+              );
+            } else if (route.name === "我慢したリスト") {
+              return (
+                <Icon
+                  name="list"
+                  size={20}
+                  color={focused ? "#3da9fc" : "#5f6c7b"}
+                />
+              );
+            }
+          },
+        })}
+        tabBarOptions={{
+          activeTintColor: "#3da9fc",
+          inactiveTintColor: "#5f6c7b",
+        }}
+      >
+        <Tab.Screen name="HOME" component={TopStackScreen} />
+        <Tab.Screen name="我慢したリスト" component={RecordsStackScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );

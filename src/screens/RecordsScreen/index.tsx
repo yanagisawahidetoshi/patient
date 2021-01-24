@@ -4,6 +4,7 @@ import { View } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { recordsContext } from "../../context/records";
 import * as colors from "../../const/colors";
+import dayjs from "dayjs";
 
 const Records: React.FC = () => {
   const ctx = React.useContext(recordsContext);
@@ -14,7 +15,7 @@ const Records: React.FC = () => {
       <List>
         <ListLeft>
           <Name>{item.name}</Name>
-          <Date>{item.createdAt}</Date>
+          <Date>{dayjs(item.createdAt).format("MM/DD HH:mm")}</Date>
         </ListLeft>
         <ListRight>
           <ListRightWrapper>

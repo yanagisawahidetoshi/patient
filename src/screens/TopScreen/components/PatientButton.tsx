@@ -16,21 +16,20 @@ const PatientButton: React.FC<Props> = ({ handlePressButton }) => {
 export default PatientButton;
 
 const CircleButton = styled.TouchableOpacity`
-  margin: auto;
+  margin: auto auto 16px auto;
   background: #3da9fc;
-  border-radius: 100px;
-  width: 200px;
-  height: 200px;
+  border-radius: 75px;
+  width: 150px;
+  height: 150px;
   justify-content: center;
   align-items: center;
   text-shadow: 0px 1px 1px #444444;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
-  margin-bottom: 40px;
 `;
 
 const ButtonText = styled.Text`
   color: #fffffe;
   font-weight: bold;
-  font-size: 30px;
+  font-size: 28px;
   font-family: "System";
 `;

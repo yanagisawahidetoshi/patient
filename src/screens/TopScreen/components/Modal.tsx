@@ -3,6 +3,7 @@ import styled from "styled-components/native";
 import Modal from "react-native-modal";
 import { Input, Button } from "react-native-elements";
 import { favoritesContext } from "../../../context/favorites";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 interface Props {
   isVisible: boolean;
@@ -26,8 +27,11 @@ const MyModal: React.FC<Props> = ({ isVisible, hideModal }) => {
   };
 
   return (
-    <Modal isVisible={isVisible}>
+    <Modal isVisible={isVisible} onBackdropPress={hideModal}>
       <Wrapper>
+        <IconWrapper onPress={hideModal}>
+          <Icon name="times" size={20} color="#5f6c7b" />
+        </IconWrapper>
         <Input
           label="なにを我慢しましたか？"
           onChangeText={(value: string) => setName(value)}
@@ -59,6 +63,7 @@ const Wrapper = styled.View`
   padding-left: 8px;
   padding-right: 8px;
   padding-bottom: 32px;
+  position: relative;
 `;
 
 const Title = styled.Text`
@@ -66,6 +71,11 @@ const Title = styled.Text`
   font-weight: bold;
   font-size: 18px;
   color: #333;
+`;
+const IconWrapper = styled.TouchableOpacity`
+  position: absolute;
+  right: 16;
+  top: 16;
 `;
 
 export default MyModal;
